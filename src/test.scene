@@ -1,0 +1,13 @@
+<scene angle="0">
+	<lua>
+		sky.setColor( mnt.color(0,0,0,255) )
+	</lua>
+
+	<text size="30" pos="0,-200" color="255,255,255,255" outline="3" outline-color="0,0,0,255" >LOOP</text>
+	<entity class="sonic" pos="0,-200"/>
+
+	<brush pos="-2500,0" angle="0" sound="grass.wav" texture="9.png" scale="1" layer="0" points="-2500 50,2500 50,2500 200,-2500 200"/>
+	<brush pos="2500,0" angle="0" sound="grass.wav" texture="9.png" scale="1" layer="0" points="-2500 50,2500 50,2500 200,-2500 200"/>
+	<brush pos="7500,0" angle="0" sound="grass.wav" texture="9.png" scale="1" layer="0" points="-2500 50,2500 50,2500 200,-2500 200"/>
+
+</scene>

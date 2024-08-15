@@ -1,0 +1,24 @@
+# Hide generated lua code
+src/*.lua
+*.lua
+
+# Hide downloaded mental engine
+mental
+
+node_modules
+/dist
+/coverage
+/test/transpile/module-resolution/**/dist
+/test/transpile/module-resolution/**/tsconfig.tsbuildinfo
+
+yarn.lock
+.vscode
+.idea
+.DS_Store
+
+benchmark/data/*
+benchmark/dist/*
+
+# v8 cpu profiles
+*-.log
+*.cpuprofile

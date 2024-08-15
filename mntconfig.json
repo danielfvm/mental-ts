@@ -1,0 +1,5 @@
+{
+  "output": "./mental/addons/my_addon",
+  "assets": [ "src/", "sounds/", "textures/", "scenes/" ],
+  "autorun": [ "./src/index.lua" ]
+}
