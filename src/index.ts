@@ -1,19 +1,27 @@
+// TODO: Figure out how to move this into `mental-types` folder and import Entity from there
+class Entity {
+	private internal: FlexibleClass;
+
+	constructor() {
+		this.internal = mnt.FlexibleClass();
+	}
+
+	addHook<
+		K extends keyof HookType,
+		V extends HookType[K],
+	>(hookType: K, callback: (args: V) => void): void {
+		this.internal.addHook(hookType, callback);
+	}
+}
+
+/** Script starts here **/
 debug.showLog();
-
-print("load sprite");
-const color = mnt.color(100, 50, 30, 255);
-
-const sprite = mnt.sprite("test.png");
-sprite.setScale(1.2);
-sprite.setColor(mnt.color(255, 255, 255, 255));
-sprite.setLayer(30);
 
 const text = mnt.text("Hello, World!");
 text.setFont("sonic-mania-improved-v2.ttf");
 text.setPos(mnt.vector2(0, 0));
 text.setColor(mnt.color(255, 0, 255, 255));
 text.setSize(50);
-text.setScale(4);
 
 
 global.addHook("key_press", (key) => {
@@ -29,12 +37,27 @@ global.addHook("key_press", (key) => {
 	}
 });
 
-const title = find(".class == 'title_sonic'")[1].text as Text;
-title.setString("Hello, World!");
+interval.create((x: string) => {
+	const title = find(".class == 'title_sonic'")[1].text as Text;
+	title.setString(x);
+}, 1000, "Hello World after 1 sec");
 
-global.addHook("mouse_press", () => {
-});
+class MyTest extends Entity {
+	private sprite: Sprite;
 
-global.addHook("think", () => {
-	sprite.setScale(math.sin(time.current * 4.0) + 1.2);
-});
+	constructor() {
+		super();
+
+		this.addHook("think", this.update.bind(this));
+		this.sprite = mnt.sprite("test.png");
+		this.sprite.setScale(1.2);
+		this.sprite.setLayer(-1);
+		this.sprite.setPos(0, -screen.height / 5);
+	}
+
+	update() {
+		this.sprite.setScale(math.sin(time.current * 4.0) * 2.0 + 10.0);
+	}
+}
+
+const entity = new MyTest();

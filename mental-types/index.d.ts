@@ -46,6 +46,8 @@ interface Sprite {
 	setShaderInt(value: number): void;
 	setShaderFloat(value: number): void;
 	setShaderFloatArray(value: number[]): void;
+	setPos(pos: Vector2): void;
+	setPos(x: number, y: number): void;
 }
 
 type RigidbodyType = "static"; // TODO: Figure out what the other types are
@@ -55,7 +57,7 @@ interface Rigidbody {
 	setVelocity(x: number, y: number): void;
 	setRotation(angle: number): void;
 	setType(type: RigidbodyType): void;
-	setOwner(owner: Entity): void;
+	setOwner(owner: FlexibleClass): void;
 	setSensor(sensor: boolean): void;
 }
 
@@ -75,21 +77,33 @@ interface Text {
 	getBounds(): Vector2;
 }
 
-declare class Entity {
-	setHook(hookType: string, callback: () => void): void;
+declare class FlexibleClass {
+	addHook<
+		K extends keyof HookType,
+		V extends HookType[K],
+	>(hookType: K, callback: (args: V) => void): void;
 }
 
 declare namespace mnt {
 	/**
 	 * Creates a new rgba color.
+	 *
+	 * @example
 	 * ```ts
 	 * const color = mnt.color(255, 0, 0, 255); // red 100% opaque
+	 * ```
+	 *
+	 * @example
+	 * ```ts
+	 * const color = { r: 255, g: 0, b: 0, a: 255 };
 	 * ```
 	 */
 	function color(r: number, g: number, b: number, a: number): Color;
 
 	/**
 	 * Creates a new vector2
+	 *
+	 * @example
 	 * ```ts
 	 * const vector2 = mnt.vector2(0, 0);
 	 * ```
@@ -98,6 +112,8 @@ declare namespace mnt {
 
 	/**
 	 * Creates a new sprite
+	 *
+	 * @example
 	 * ```ts
 	 * const sprite = mnt.sprite("test.png");
 	 * ```
@@ -106,16 +122,22 @@ declare namespace mnt {
 
 	/**
 	 * Create a new text
+	 *
+	 * @example
 	 * ```ts
 	 * const text = mnt.text("test");
 	 * ```
 	 */
 	function text(text: string): Text;
+
+	function FlexibleClass(): FlexibleClass;
 }
 
 declare namespace global {
 	/**
 	 * Adds a listener that will be called when the event is triggered
+	 *
+	 * @example
 	 * ```ts
 	 * global.addHook("key_press", (key) => {
 	 *   print("key pressed: " + key);
@@ -131,6 +153,8 @@ declare namespace global {
 declare namespace sky {
 	/**
 	 * Sets the color of the sky
+	 *
+	 * @example
 	 * ```ts
 	 * sky.setColor(mnt.color(255, 0, 0, 255)); // red sky
 	 * ```
@@ -141,6 +165,8 @@ declare namespace sky {
 declare namespace sound {
 	/**
 	 * Plays a sound file
+	 *
+	 * @example
 	 * ```ts
 	 * sound.play("canary.wav", 1.0, 40, mnt.vector2(0, 0));
 	 * ```
@@ -178,6 +204,8 @@ declare namespace music {
 declare namespace scene {
 	/**
 	 * Loads a scene by name. Scene has to be a file in xml format with the ext `.scene`
+	 *
+	 * @example
 	 * ```ts
 	 * scene.load("my_scene.scene");
 	 * ```
@@ -232,8 +260,28 @@ declare namespace game {
 
 /**
  * Finds any loaded object by its attributes
+ *
+ * @example
  * ```ts
  * find(".class == 'title_sonic'")[1].text.setString("Hello, World!");
  * ```
  */
 declare function find(path: string): any;
+
+/**
+ * As a matter of fact not an interval but a timeout
+ */
+declare namespace interval {
+
+	/**
+	 * Creates a new timeout that will be called after the specified milliseconds with the specified argument.
+	 *
+	 * @example
+	 * ```ts
+	 * interval.create((arg) => {
+	 *   print(arg);
+	 * }, 1000, "Hello, World after 1 second!");
+	 * ```
+	 */
+	function create<T>(callback: (arg: T) => void, timeout: number, arg: T): void;
+}
