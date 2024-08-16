@@ -14,7 +14,7 @@ Classes are supported by TypeScript out of the box and do not require some magic
 
 
 ## How?
-This project uses [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua) to generate lua code from typescript. The generated lua files together
+This project uses [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua) to generate lua code from TypeScript. The generated lua files together
 with any other valid asset file (images, audio, etc) will be bundled together to an addon. See [build.js](./build.js) for more details.
 
 
