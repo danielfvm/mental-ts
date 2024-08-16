@@ -74,11 +74,24 @@ interface Sprite {
 
 interface Rigidbody {
 	setVelocity(velocity: Vector2): void;
-	setVelocity(x: number, y: number): void;
+	//setVelocity(x: number, y: number): void;		// Not overloaded to accept the X and Y, only the Vector2
+	applyVelocity(velocity: Vector2): void;			// Apply the velocity
 	setRotation(angle: number): void;
+	setFriction(amount: number): void;			// The name is self-explaining
+	setBouncy(amount: number): void;			// The name is self-explaining
+	setFixedRotation(fixed: boolean): void;			// Locks the rotation
+	getFixedRotation(): boolean;				// Returns True if the rotation is locked
+	setAngularVelocity(amount: number): void;		// Set the speed of the rotation
+	applyAngularVelocity(amount: number): void;		// Applies the angular speed
+	setLinearDamping(amount: number): void;			// The power of linear dumping
+	getLinearDamping(): number;				// Returns the power of linear dumping
+	setAngularDamping(amount: number): void;		// The power of angular dumping ( You can make a wing for example )
+	getAngularDamping(): number;				// Returns the power of angular dumping
 	setType(type: RigidbodyType): void;
 	setOwner(owner: FlexibleClass): void;
 	setSensor(sensor: boolean): void;
+	setBullet(bullet: boolean): void;			// The object is calculated with collision checking in between of the two positions preventing the quantum tunnelling
+	getBullet(): boolean;					// Is the bullet option turned on?
 }
 
 interface Text {
@@ -102,6 +115,8 @@ declare namespace debug {
 }
 
 declare class FlexibleClass {
+	"id": number;						// Id of the object, the engine sets the random one
+	"name": string;						// The class name. the engine sets the corresponding name to the FlexibleClass
 	addHook<
 		K extends keyof HookType,
 		V extends HookType[K],
