@@ -1,5 +1,5 @@
 # mental-ts
-Write mental engine addons with TypeScript.
+Write addons for the [mental engine](https://mentalgames.org/) with TypeScript.
 
 ## Why?
 Types allow you to write safer code that won't have runtime errors duo to missspelling or using the wrong method name. 
@@ -19,6 +19,7 @@ with any other valid asset file (images, audio, etc) will be bundled together to
 
 
 ## Setup
+Download the project and run the `setup` script which will download the Engine / Sonic Game from the [offical website](https://mentalgames.org/game/1), extract and renames it automatically. Then install the dependencies and you should be able to write your own addons. See the instructions below for more a detailed setup for your OS.
 ### Linux
 ```
 git clone https://github.com/danielfvm/mental-ts
@@ -27,7 +28,13 @@ cd mental-ts
 npm install
 ```
 ### Windows
-Not yet tested and `setup.sh` won't work - you will need to download the Engine from the [offical website](https://mentalgames.org/game/1) manually and extract it.
+Not yet tested - `setup.ps1` and `build.js` might now work. If that is the case please download the game manually, extract it and rename the folder to `mental` (place it in the project's root folder). You also might need to rename the paths inside the `package.json`>`scripts` to include the `.exe`.  
+```
+git clone https://github.com/danielfvm/mental-ts
+cd mental-ts
+.\setup.ps1
+npm install
+```
 
 ## Config
 Inside the `mntconfig.json` you can configure your plugin.
