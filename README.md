@@ -39,6 +39,9 @@ Inside the `mntconfig.json` you can configure your plugin.
 }
 ```
 
+## Write an addon
+See [index.ts](./src/index.ts) for an example typescript addon that loads on startup. You can add your textures, audio, font, etc to the `src/` folder or alternatively you can create separate folders for a more organized project structure. If you do so make sure to specify the new asset folder in the `mntconfig.json`!
+
 ## Run
 To start the game with your addon run:
 ```
@@ -51,8 +54,8 @@ npm run debug
 ```
 
 ## Todo
-* [ ] Support entities
-* [ ] Add missing declarations
-* [ ] Add better comments with examples to declarations
-* [ ] Move declaration to own package
-* [ ] Support for windows
+* [ ] Support entities / figure out how to move `Entity` class out of `src/index.ts` to `/mental-types/`
+* [ ] Add missing type declarations, see [this](/mental-types/index.d.ts)
+* [ ] Add better comments with examples to type declarations
+* [x] Move declaration to own package
+* [ ] Support for windows / test if [setup.ps1](/setup.ps1) and [build.js](/build.js) work.
