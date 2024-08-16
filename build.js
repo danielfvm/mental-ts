@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 import fs from "fs";
 import path from "path";
-import config from "./mntconfig.json" with { type: "json" };
 
-const { output, assets, autorun } = config;
+const { output, assets, autorun } = JSON.parse(fs.readFileSync("mntconfig.json", "utf-8"));
 const extensions = {
 	"logic/": [".lua"],
 	"shaders/": [".gles"],
