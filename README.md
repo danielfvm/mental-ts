@@ -8,6 +8,10 @@ Types allow you to write safer code that won't have runtime errors duo to misssp
 It also allows for better integration in your IDE with proper intellisense. Documentation and example codes can directly be added to the type declarations.
 ![image](https://github.com/user-attachments/assets/0edaf67f-a9de-4d99-86e2-e23d1dbb845f)
 
+## How?
+This project uses [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua) to generate lua code from typescript. The generated lua files together
+with any other valid asset file (images, audio, etc) will be bundled together to an addon. See [build.js](./build.js) for more details.
+
 
 ## Setup
 ### Linux
