@@ -15,7 +15,7 @@ class Entity {
 }
 
 /** Script starts here **/
-debug.showLog();
+// debug.showLog();
 
 const text = mnt.text("Hello, World!");
 text.setFont("sonic-mania-improved-v2.ttf");
