@@ -7,6 +7,11 @@ Types allow you to write safer code that won't have runtime errors duo to misssp
 
 It also allows for better integration in your IDE with proper intellisense. Documentation and example codes can directly be added to the type declarations.
 ![image](https://github.com/user-attachments/assets/0edaf67f-a9de-4d99-86e2-e23d1dbb845f)
+![image](https://github.com/user-attachments/assets/30c4671f-c9fc-414c-8a16-dd305280c5bf)
+
+Classes are supported by TypeScript out of the box and do not require some magic non-standardized lua code / preprocessor to implement them.
+![image](https://github.com/user-attachments/assets/2e52529c-7795-4d86-94d8-cb79ab10baf4)
+
 
 ## How?
 This project uses [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua) to generate lua code from typescript. The generated lua files together
