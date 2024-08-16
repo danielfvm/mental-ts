@@ -6,3 +6,4 @@ wget https://mentalgames.org/files/games/1/game/Linux.zip
 unzip Linux.zip
 mv Linux mental
 rm Linux.zip
+echo "Done!"
