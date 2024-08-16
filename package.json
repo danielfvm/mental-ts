@@ -4,7 +4,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "lua": "tstl",
-    "build": "./build.js",
+    "build": "node ./build.js",
     "debug": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo",
     "release": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --skip-logo",
     "start": "npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo"
@@ -17,6 +17,7 @@
     "fs": "^0.0.1-security",
     "lua-types": "^2.13.1",
     "typescript": "^5.5.2",
-    "typescript-to-lua": "^1.26.2"
+    "typescript-to-lua": "^1.26.2",
+    "@mental/types": "file:./mental-types"
   }
 }

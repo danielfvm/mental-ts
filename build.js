@@ -12,8 +12,17 @@ const extensions = {
 	"textures/": [".png", ".jpg", ".bmp", ".tga", ".gif", ".psd", ".hdr", ".pic", ".pnm"],
 	"scenes/": [".scene"],
 };
+const additional = [
+	{ "folder": ".", "filePath": "lualib_bundle.lua" },
+];
 
 function isValid(filePath) {
+	// check if exists
+	if (!fs.existsSync(filePath)) {
+		return false;
+	}
+
+	// check if file extensions is valid
 	return Object.values(extensions).some((extensions) => {
 		return extensions.some((ext) => filePath.endsWith(ext));
 	});
@@ -68,9 +77,11 @@ if (fs.existsSync(output)) {
 }
 
 // copy all valid files to the new output folder
-assets
+const files = assets
 	.map((assetFolder) => readDir(assetFolder, assetFolder))
-	.flat()
+	.flat();
+
+[...files, ...additional]
 	.filter(({ filePath }) => isValid(filePath))
 	.forEach(({ folder, filePath }) => {
 		const relativePath = path.relative(folder, filePath);
