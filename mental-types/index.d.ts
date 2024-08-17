@@ -38,6 +38,10 @@ interface Vector2 {
 	y: number;
 }
 
+interface CollisionBox {
+	// TODO: no idea what it contains 
+}
+
 // HookType defines the hook event name and the values passed to the callback
 //   "hook_name":callback_type
 interface HookType {
@@ -70,6 +74,11 @@ interface Sprite {
 	setShaderFloatArray(uniform: string, value: number[]): void;
 	setPos(pos: Vector2): void;
 	setPos(x: number, y: number): void;
+
+	/**
+	 * Removes the entity from the scene
+	 */
+	remove(): void;
 }
 
 interface Rigidbody {
@@ -92,6 +101,15 @@ interface Rigidbody {
 	setSensor(sensor: boolean): void;
 	setBullet(bullet: boolean): void;			// The object is calculated with collision checking in between of the two positions preventing the quantum tunnelling
 	getBullet(): boolean;					// Is the bullet option turned on?
+	setPos(pos: Vector2): void;
+	getPos(): Vector2;
+	getRotation(): number;
+	setRotation(angle: number): void;
+
+	/**
+	 * Removes the entity from the scene
+	 */
+	remove(): void;
 }
 
 interface Text {
@@ -108,6 +126,11 @@ interface Text {
 	screenCoords(value: boolean): void;
 	setString(text: string): void;
 	getBounds(): Vector2;
+
+	/**
+	 * Removes the entity from the scene
+	 */
+	remove(): void;
 }
 
 declare namespace debug {
@@ -115,12 +138,35 @@ declare namespace debug {
 }
 
 declare class FlexibleClass {
-	"id": number;						// Id of the object, the engine sets the random one
-	"name": string;						// The class name. the engine sets the corresponding name to the FlexibleClass
+	/** 
+	 * Id of the object, the engine sets the random one
+	 */
+	id: number;		
+
+	/**
+	 * The class name. the engine sets the corresponding name to the FlexibleClass
+	 */
+	name: string;	
+
+	/**
+	 * Adds a listener that will be called when the event is triggered
+	 *
+	 * @example
+	 * ```ts
+	 * global.addHook("key_press", (key) => {
+	 *   print("key pressed: " + key);
+	 * });
+	 * ```
+	 */
 	addHook<
 		K extends keyof HookType,
 		V extends HookType[K],
 	>(hookType: K, callback: (args: V) => void): void;
+
+	/**
+	 * Removes the entity from the scene
+	 */
+	remove(): void;
 }
 
 declare namespace mnt {
@@ -323,4 +369,22 @@ declare namespace interval {
 	 * ```
 	 */
 	function create<T>(callback: (arg: T) => void, timeout: number, arg: T): void;
+}
+
+declare namespace file {
+	function read(path: string): string;
+	function write(path: string, content: string): void;
+}
+
+declare namespace collision {
+	function box(bounds: Vector2): CollisionBox;
+}
+
+declare namespace physics {
+	function rigidbody(collisionBox: CollisionBox): Rigidbody;
+}
+
+declare namespace lua {
+	function clear(): void;
+	function interprete(code: string): void;
 }
