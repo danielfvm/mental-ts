@@ -5,12 +5,12 @@
   "scripts": {
     "build": "tstl && node ./build.js",
 
-    "debug:nix": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo",
-    "debug:win32": "npm run lua && npm run build && cd mental && \".\\Sonic Modules.exe\" --debug --skip-logo",
+    "debug:nix": "npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo",
+    "debug:win32": "npm run build && cd mental && \".\\Sonic Modules.exe\" --debug --skip-logo",
     "debug": "run-script-os",
 
-    "release:nix": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --skip-logo",
-    "release:win32": "npm run lua && npm run build && cd mental && \".\\Sonic Modules.exe\" --skip-logo",
+    "release:nix": "npm run build && cd mental && ./Sonic\\ Modules --skip-logo",
+    "release:win32": "npm run build && cd mental && \".\\Sonic Modules.exe\" --skip-logo",
     "release": "run-script-os"
   },
   "author": "DeanCode",
