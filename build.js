@@ -109,7 +109,7 @@ files
 				);
 			}
 
-			fs.writeFileSync(destination, data);
+			fs.writeFileSync(destination, data, "utf8");
 		} else {
 			fs.copyFileSync(filePath, destination);
 		}

@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "./src/index.ts",
   "scripts": {
-    "lua": "tstl",
-    "build": "node ./build.js",
+    "build": "tstl && node ./build.js",
 
     "debug:nix": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo",
     "debug:win32": "npm run lua && npm run build && cd mental && \".\\Sonic Modules.exe\" --debug --skip-logo",
