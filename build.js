@@ -84,8 +84,8 @@ const luaSources = files
 	.map(({filePath, folder}) => {
 		const subfolder = filePath.substring(folder.length, filePath.length - 4);
 		return {
-			generated_path: filePath.substring(0, filePath.length - 4).replace(/\//gi, "."),
-			fixed_path: path.join("addons", addon_name, "logic", subfolder).replace(/\//gi, "."),
+			generated_path: filePath.substring(0, filePath.length - 4).replace(/\//gi, ".").replace(/\\/gi, "."),
+			fixed_path: path.join("addons", addon_name, "logic", subfolder).replace(/\//gi, ".").replace(/\\/gi, "."),
 		}
 	});
 

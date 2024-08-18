@@ -5,19 +5,25 @@
   "scripts": {
     "lua": "tstl",
     "build": "node ./build.js",
-    "debug": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo",
-    "release": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --skip-logo",
-    "start": "npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo"
+
+    "debug:nix": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --debug --skip-logo",
+    "debug:win32": "npm run lua && npm run build && cd mental && \".\\Sonic Modules.exe\" --debug --skip-logo",
+    "debug": "run-script-os",
+
+    "release:nix": "npm run lua && npm run build && cd mental && ./Sonic\\ Modules --skip-logo",
+    "release:win32": "npm run lua && npm run build && cd mental && \".\\Sonic Modules.exe\" --skip-logo",
+    "release": "run-script-os"
   },
   "author": "DeanCode",
   "license": "ISC",
   "description": "A project for writing your game in TypeScript and run the generated lua code inside the mental engine",
   "type": "module",
   "devDependencies": {
+    "@mental/types": "file:./mental-types",
     "fs": "^0.0.1-security",
     "lua-types": "^2.13.1",
     "typescript": "^5.5.2",
     "typescript-to-lua": "^1.26.2",
-    "@mental/types": "file:./mental-types"
+    "run-script-os": "^1.1.6"
   }
 }
