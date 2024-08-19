@@ -3,6 +3,8 @@ export class Entity {
 
 	constructor() {
 		this.internal = mnt.FlexibleClass();
+		this.internal.setName(this.constructor.name);
+		this.internal.setRef(this.internal);
 	}
 
 	/**

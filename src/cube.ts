@@ -36,9 +36,9 @@ export class Cube extends Entity {
 			createQuad(5),
 		];
 
-		global.addHook("mouse_release", () => this.mouse_release());
-		global.addHook("think", () => this.update());
-		global.addHook("drag", (pos) => this.drag(pos));
+		this.addHook("mouse_release", this.mouse_release.bind(this));
+		this.addHook("think", this.update.bind(this));
+		this.addHook("drag", this.drag.bind(this));
 	}
 
 	remove(): void {

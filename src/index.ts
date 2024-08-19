@@ -1,6 +1,8 @@
 import {Cube} from "./cube";
+import {Entity} from "./entity";
 
 debug.showLog();
+scene.load("empty.scene");
 
 global.addHook("key_press", (key) => {
 	print("key pressed: " + key);
@@ -37,3 +39,72 @@ function serialize(obj: any, prefix = "") {
 serialize(lua);
 
 lua.interprete(`print("Hello World from lua!")`);
+
+
+type Shape = (self: Draggable, pos: Vector2) => boolean;
+
+function createRect(size: Vector2): Shape { 
+	return (self: Draggable, pos: Vector2) =>
+		self.pos.x - size.x / 2 <= pos.x && self.pos.x + size.x / 2 >= self.pos.x && 
+		self.pos.y - size.y / 2 <= pos.y && self.pos.y + size.y / 2 >= self.pos.y;
+}
+
+function createCircle(radius: number): Shape {
+	return (self: Draggable, pos: Vector2) =>
+		Math.sqrt((pos.x - self.pos.x) * (pos.x - self.pos.x) + (pos.y - self.pos.y) * (pos.y - self.pos.y)) <= radius;
+}
+
+
+class Draggable extends Entity {
+	public pos: Vector2;
+	public shape: Shape;
+
+	private last: Vector2 | null = null;
+	private prev: Vector2 = mnt.vector2(0, 0);
+
+	constructor(pos: Vector2, shape: Shape) {
+		super();
+		this.pos = pos;
+		this.shape = shape;
+
+		this.addHook("mouse_release", this.mouse_release.bind(this));
+		this.addHook("think", this.update.bind(this));
+		this.addHook("drag", this.drag.bind(this));
+	}
+
+	inBounds(pos: Vector2): boolean {
+		return this.shape(this, pos);
+	}
+
+	drag(pos: Vector2) {
+		if (!this.inBounds(pos)) {
+			return;
+		}
+
+		if (this.last == null) {
+			this.last = mnt.vector2(this.pos.x - pos.x, this.pos.y - pos.y);
+			this.prev = mnt.vector2(pos.x, pos.y);
+		} else {
+			// We do this because drag event doesn't work properly and sends random values in between the correct ones
+			const distance = math.sqrt((this.prev.x - pos.x) * (this.prev.x - pos.x) + (this.prev.y - pos.y) * (this.prev.y - pos.y));
+
+			if (distance < 50) {
+				this.prev = mnt.vector2(pos.x, pos.y);
+				this.pos = mnt.vector2(this.last.x + pos.x, this.last.y + pos.y);
+			}
+		}
+	}
+
+	mouse_release() {
+		this.last = null;
+	}
+	
+	update() {
+	}
+}
+
+print("\nScene entities: ");
+for (const entity of ents.list()) {
+	print(`\t${entity.name} [${entity.id}]`);
+}
+

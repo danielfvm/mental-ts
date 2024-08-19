@@ -167,6 +167,14 @@ declare class FlexibleClass {
 	 * Removes the entity from the scene
 	 */
 	remove(): void;
+
+	/**
+	 * Set the internal class name
+	 */
+	setName(name: string): void;
+
+	// TODO: Not sure what this is used for
+	setRef(ref: FlexibleClass): void;
 }
 
 declare namespace mnt {
@@ -387,4 +395,9 @@ declare namespace physics {
 declare namespace lua {
 	function clear(): void;
 	function interprete(code: string): void;
+}
+
+
+declare namespace ents {
+	function list(): FlexibleClass[];
 }
