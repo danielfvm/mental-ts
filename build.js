@@ -4,7 +4,7 @@ import path from "path";
 
 const {output, assets, autorun} = JSON.parse(fs.readFileSync("mntconfig.json", "utf-8"));
 const extensions = {
-	"logic/": [".lua"],
+	"logic/": [".lua", ".so", ".dll"],
 	"shaders/": [".gles", ".gls", ".glsl"],
 	"fonts/": [".ttf"],
 	"sounds/": [".mp3", ".wav", ".flac", ".ogg"],
@@ -67,6 +67,7 @@ function readDir(assetFolder, dir) {
 }
 
 
+
 // Delete the old output folder
 if (fs.existsSync(output)) {
 	fs.rmSync(output, {recursive: true});
@@ -80,14 +81,17 @@ const files = assets
 const addon_name = path.basename(output);
 
 const luaSources = files
-	.filter(({filePath}) => filePath.endsWith(".lua"))
+	.filter(({filePath}) => filePath.endsWith(".lua") || filePath.endsWith(".so") || filePath.endsWith(".dll"))
 	.map(({filePath, folder}) => {
-		const subfolder = filePath.substring(folder.length, filePath.length - 4);
+		const subfolder = filePath.substring(folder.length, filePath.lastIndexOf('.'));
 		return {
-			generated_path: filePath.substring(0, filePath.length - 4).replace(/\//gi, ".").replace(/\\/gi, "."),
+			generated_path: filePath.substring(0, filePath.lastIndexOf('.')).replace(/\//gi, ".").replace(/\\/gi, "."),
 			fixed_path: path.join("addons", addon_name, "logic", subfolder).replace(/\//gi, ".").replace(/\\/gi, "."),
 		}
 	});
+console.log(luaSources);
+
+console.log(files);
 
 files
 	.filter(({filePath}) => isValid(filePath))

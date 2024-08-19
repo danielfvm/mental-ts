@@ -83,27 +83,86 @@ interface Sprite {
 
 interface Rigidbody {
 	setVelocity(velocity: Vector2): void;
-	//setVelocity(x: number, y: number): void;		// Not overloaded to accept the X and Y, only the Vector2
-	applyVelocity(velocity: Vector2): void;			// Apply the velocity
-	setRotation(angle: number): void;
-	setFriction(amount: number): void;			// The name is self-explaining
-	setBouncy(amount: number): void;			// The name is self-explaining
-	setFixedRotation(fixed: boolean): void;			// Locks the rotation
-	getFixedRotation(): boolean;				// Returns True if the rotation is locked
-	setAngularVelocity(amount: number): void;		// Set the speed of the rotation
-	applyAngularVelocity(amount: number): void;		// Applies the angular speed
-	setLinearDamping(amount: number): void;			// The power of linear dumping
-	getLinearDamping(): number;				// Returns the power of linear dumping
-	setAngularDamping(amount: number): void;		// The power of angular dumping ( You can make a wing for example )
-	getAngularDamping(): number;				// Returns the power of angular dumping
+
+	/**
+	 * Apply the velocity
+	 */
+	applyVelocity(velocity: Vector2): void;
+
+	/**
+	 * The name is self-explaining
+	 */
+	setFriction(amount: number): void;
+
+	/**
+	 * The name is self-explaining
+	 */
+	setBouncy(amount: number): void;
+
+	/**
+	 * Locks the rotation
+	 */
+	setFixedRotation(fixed: boolean): void;
+
+	/**
+	 * Returns True if the rotation is locked
+	 */
+	getFixedRotation(): boolean;
+
+	/**
+	 * Set the speed of the rotation
+	 */
+	setAngularVelocity(amount: number): void;
+
+	/**
+	 * Applies the angular speed
+	 */
+	applyAngularVelocity(amount: number): void;
+
+	/**
+	 * The power of linear dumping
+	 */
+	setLinearDamping(amount: number): void;
+
+	/**
+	 * Returns the power of linear dumping
+	 */
+	getLinearDamping(): number;
+
+	/**
+	 * The power of angular dumping ( You can make a wing for example )
+	 */
+	setAngularDamping(amount: number): void;
+
+	/**
+	 * Returns the power of angular dumping
+	 */
+	getAngularDamping(): number;
+
 	setType(type: RigidbodyType): void;
+
 	setOwner(owner: FlexibleClass): void;
+
 	setSensor(sensor: boolean): void;
-	setBullet(bullet: boolean): void;			// The object is calculated with collision checking in between of the two positions preventing the quantum tunnelling
-	getBullet(): boolean;					// Is the bullet option turned on?
+
+	/**
+	 * The object is calculated with collision checking in between of the two positions preventing the quantum tunnelling
+	 */
+	setBullet(bullet: boolean): void;
+
+	/**
+	 * Is the bullet option turned on?
+	 */
+	getBullet(): boolean;
+
 	setPos(pos: Vector2): void;
+
 	getPos(): Vector2;
+
+	setRotation(angle: number): void;
+
 	getRotation(): number;
+
 	setRotation(angle: number): void;
 
 	/**
@@ -141,12 +200,12 @@ declare class FlexibleClass {
 	/** 
 	 * Id of the object, the engine sets the random one
 	 */
-	id: number;		
+	id: number;
 
 	/**
 	 * The class name. the engine sets the corresponding name to the FlexibleClass
 	 */
-	name: string;	
+	name: string;
 
 	/**
 	 * Adds a listener that will be called when the event is triggered
@@ -173,7 +232,9 @@ declare class FlexibleClass {
 	 */
 	setName(name: string): void;
 
-	// TODO: Not sure what this is used for
+	/**
+	 * Set the internal reference to the object
+	 */
 	setRef(ref: FlexibleClass): void;
 }
 
@@ -393,11 +454,27 @@ declare namespace physics {
 }
 
 declare namespace lua {
+	/**
+	 * Clears all loaded entities, Text, Sprite, etc. Does NOT remove global hooks!
+	 */
 	function clear(): void;
+
+	/**
+	 * Interprets lua code, doesn't return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * lua.interprete("print('Hello World from lua!')");
+	 * ```
+	 */
 	function interprete(code: string): void;
 }
 
 
 declare namespace ents {
+	/**
+	 * Returns a list of loaded entities (using FlexibleClass), it does NOT return objects
+	 * like Text, Sprite, etc.
+	 */
 	function list(): FlexibleClass[];
 }

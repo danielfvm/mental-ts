@@ -7,8 +7,18 @@ function createQuad(index: number): Sprite {
 	sprite.loadShader("model");
 	sprite.setColor(mnt.color(index, 0, 0, 0));
 	sprite.setShaderFloatArray("pos", [
-			/* Front  */  1, 1, 1, -1, -1, 1, -1, 1, 1, -1, -1, 1,
-			/* Back   */ -1, -1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1,
+			/* Front  */  
+			 1,-1, 1, 
+			 1, 1, 1, 
+			-1,-1, 1,
+			-1, 1, 1, 
+
+			/* Back   */ 
+			1, 1, -1,
+			-1, 1, -1, 
+			1, -1, -1, 
+			-1, -1, -1, 
+
 			/* Left   */ -1, -1, -1, -1, 1, -1, -1, -1, 1, -1, 1, 1,
 			/* Right  */  1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1,
 			/* Top    */ -1, 1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1,

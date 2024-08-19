@@ -1,7 +1,9 @@
 import {Cube} from "./cube";
 import {Entity} from "./entity";
 
+
 debug.showLog();
+lua.clear();
 scene.load("empty.scene");
 
 global.addHook("key_press", (key) => {
@@ -108,3 +110,5 @@ for (const entity of ents.list()) {
 	print(`\t${entity.name} [${entity.id}]`);
 }
 
+// require("custom.lib.libcpp_library");
+// custom.enableCullFace();
