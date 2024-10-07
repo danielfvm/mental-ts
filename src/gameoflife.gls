@@ -1,0 +1,41 @@
+begin vertex;
+#version 130
+void main()
+{
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+    gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+    gl_FrontColor = gl_Color;
+}
+
+begin fragment;
+#version 130
+uniform sampler2D texture;
+uniform sampler2D buffer;
+uniform float time;
+uniform float width;
+uniform float height;
+uniform float scale;
+
+void main()
+{
+    gl_FragColor = texture2D(buffer, vec2(gl_TexCoord[0].xy)) > 0.5 ? vec4(1) : vec4(0);
+
+/*    ivec2 screen = ivec2(width, height);
+    ivec2 pos = ivec2(gl_TexCoord[0].xy * screen.xy);
+
+    int n =
+          int(round(texture2D(buffer, vec2(pos + ivec2(-1, -1)) / screen.xy).r))
+        + int(round(texture2D(buffer, vec2(pos + ivec2( 0, -1)) / screen.xy).r))
+        + int(round(texture2D(buffer, vec2(pos + ivec2( 1, -1)) / screen.xy).r))
+        + int(round(texture2D(buffer, vec2(pos + ivec2(-1,  0)) / screen.xy).r))
+        + int(round(texture2D(buffer, vec2(pos + ivec2( 1,  0)) / screen.xy).r))
+        + int(round(texture2D(buffer, vec2(pos + ivec2(-1,  1)) / screen.xy).r))
+        + int(round(texture2D(buffer, vec2(pos + ivec2( 0,  1)) / screen.xy).r))
+        + int(round(texture2D(buffer, vec2(pos + ivec2( 1,  1)) / screen.xy).r));
+
+    bool self = bool(round(texture2D(buffer, vec2(pos) / screen.xy).r));
+
+    bool state = !self;// self ? n == 2 || n == 3 : n == 3;
+
+    gl_FragColor = state ? vec4(1) : vec4(0);*/
+}

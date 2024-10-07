@@ -2,9 +2,31 @@ import {Cube} from "./cube";
 import {Entity} from "./entity";
 
 
-debug.showLog();
+debug.setEnabled(true);
 lua.clear();
-scene.load("empty.scene");
+screen.addShader("gameoflife");
+print("loaded");
+
+global.addHook("key_press", (key) => {
+	if (key == "Escape") {
+		game.exit();
+	}
+});
+
+const circle = mnt.sprite("pixel.png");
+circle.setScale(0);
+
+global.addHook("drag", (pos) => {
+	circle.setScale(1);
+	print(pos.x + " " + pos.y);
+	circle.setPos(mnt.vector2(pos.x - screen.width / 2, pos.y - screen.height / 2));
+});
+
+global.addHook("mouse_release", () => {
+	circle.setScale(0);
+})
+
+/*scene.load("empty.scene");
 
 global.addHook("key_press", (key) => {
 	print("key pressed: " + key);
@@ -108,7 +130,7 @@ class Draggable extends Entity {
 print("\nScene entities: ");
 for (const entity of ents.list()) {
 	print(`\t${entity.name} [${entity.id}]`);
-}
+}*/
 
 // require("custom.lib.libcpp_library");
 // custom.enableCullFace();

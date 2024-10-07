@@ -89,9 +89,6 @@ const luaSources = files
 			fixed_path: path.join("addons", addon_name, "logic", subfolder).replace(/\//gi, ".").replace(/\\/gi, "."),
 		}
 	});
-console.log(luaSources);
-
-console.log(files);
 
 files
 	.filter(({filePath}) => isValid(filePath))

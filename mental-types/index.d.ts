@@ -55,14 +55,13 @@ interface HookType {
 	"mouse_press": void;
 	"drag": Vector2;
 	"physics": void;
+	"debugrender": void;
 }
 
 interface Sprite {
 	setScale(scale: number): void;
-	setRectSize(size: Vector2): void;
-	setRectSize(width: number, height: number): void;
+	setRectSize(w: number, h: number): void;
 	setRectPos(pos: Vector2): void;
-	setRectPos(x: number, y: number): void;
 	setColor(color: Color): void;
 	setLayer(layer: number): void;
 	loadShader(shader: string): void;
@@ -193,7 +192,7 @@ interface Text {
 }
 
 declare namespace debug {
-	function showLog(): void;
+	function setEnabled(enabled: boolean): void;
 }
 
 declare class FlexibleClass {
@@ -325,7 +324,7 @@ declare namespace sound {
 	 * sound.play("canary.wav", 1.0, 40, mnt.vector2(0, 0));
 	 * ```
 	 */
-	function play(name: string, volume: number, unknown: number, location: Vector2): void;
+	function play(name: string, pitch: number, volume: number, location: Vector2): void;
 }
 
 declare namespace music {
@@ -402,6 +401,16 @@ declare namespace screen {
 	 * The window height in pixel
 	 */
 	var height: number;
+
+	/**
+	 * Add a screen space shader effect
+	 */
+	function addShader(path: string): void;
+
+	/**
+	 * Enable or disable a screen space shader effect
+	 */
+	function setShaderEnabled(path: string, enabled: boolean): void;
 }
 
 
@@ -477,4 +486,20 @@ declare namespace ents {
 	 * like Text, Sprite, etc.
 	 */
 	function list(): FlexibleClass[];
+}
+
+declare namespace imgui {
+	function SetNextWindowSize(size: Vector2): void;
+	function Begin(title: string): void;
+	function End(): void;
+
+	function Text(text: string): void;
+}
+
+
+declare namespace android {
+	/**
+	 * Enables on screen joystick
+	 */
+	var joystick: boolean;
 }
