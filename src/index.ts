@@ -1,3 +1,17 @@
+debug.setEnabled(true);
+print("test");
+
+global.addHook("key_press", (key) => {
+	if (key == "Escape") {
+		game.exit();
+	}
+
+	if (key == "Space") {
+		print(http.get("https://www.google.com"));
+	}
+});
+
+/*
 import {Cube} from "./cube";
 import {Entity} from "./entity";
 
@@ -6,12 +20,6 @@ debug.setEnabled(true);
 lua.clear();
 screen.addShader("gameoflife");
 print("loaded");
-
-global.addHook("key_press", (key) => {
-	if (key == "Escape") {
-		game.exit();
-	}
-});
 
 const circle = mnt.sprite("pixel.png");
 circle.setScale(0);
@@ -24,7 +32,7 @@ global.addHook("drag", (pos) => {
 
 global.addHook("mouse_release", () => {
 	circle.setScale(0);
-})
+})*/
 
 /*scene.load("empty.scene");
 
