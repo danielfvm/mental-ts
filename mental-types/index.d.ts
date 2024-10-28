@@ -508,7 +508,7 @@ declare namespace http {
 	/**
 	 * Sends an HTTP GET request
 	 */
-	function get(url: string): void;
+	function get(url: string): string;
 }
 
 declare namespace json {
