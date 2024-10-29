@@ -1,5 +1,5 @@
 {
-  "output": "./mental/addons/my_addon",
-  "assets": [ "src/", "custom/lib/" ],
+  "output": "./mental/addons/tetris",
+  "assets": [ "src/", "res/" ],
   "autorun": [ "./src/index.lua" ]
 }

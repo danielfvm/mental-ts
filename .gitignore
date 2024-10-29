@@ -1,5 +1,8 @@
+res/*
+server
+
 # Hide generated lua code
-src/*.lua
+src/*
 *.lua
 
 # Hide downloaded mental engine

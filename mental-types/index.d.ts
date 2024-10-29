@@ -503,3 +503,22 @@ declare namespace android {
 	 */
 	var joystick: boolean;
 }
+
+declare namespace http {
+	/**
+	 * Sends an HTTP GET request
+	 */
+	function get(url: string): string;
+}
+
+declare namespace json {
+	/**
+	 * Parses a JSON string
+	 */
+	function parse(json: string): any;
+
+	/**
+	 * Serializes an object
+	 */
+	function dump(obj: any): string;
+}
