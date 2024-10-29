@@ -1,0 +1,27 @@
+begin vertex;
+#version 130
+void main()
+{
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+    gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+    gl_FrontColor = gl_Color;
+}
+
+begin fragment;
+#version 130
+uniform sampler2D texture;
+uniform sampler2D buffer;
+uniform float time;
+uniform float width;
+uniform float height;
+uniform float scale;
+
+void main()
+{
+    // float light = (sin(gl_TexCoord[0].x*3.14159265) + sin(gl_TexCoord[0].y*3.14159265))/2;
+
+    vec2 uv = gl_TexCoord[0].xy;
+    vec4 screen = texture2D(buffer, uv);
+
+    gl_FragColor = vec4(vec3(1.0) - screen.rgb, 1.0);
+}
