@@ -1,5 +1,5 @@
-res/*
-server
+/res
+/server
 
 # Hide generated lua code
 src/*
