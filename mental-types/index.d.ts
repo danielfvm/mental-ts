@@ -24,6 +24,11 @@ type KeyType =
 	| "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9"
 	| "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12" | "F13" | "F14" | "F15";
 
+type MouseType =
+	| "Left"
+	| "Middle"
+	| "Right";
+
 type RigidbodyType = "static" | "dynamic" | "kinematic";
 
 interface Color {
@@ -51,8 +56,9 @@ interface HookType {
 	"window_unfocus": void;
 	"think": void;
 	"fixed_think": void;
-	"mouse_release": void;
-	"mouse_press": void;
+	"mouse_release": MouseType;
+	"mouse_press": MouseType;
+	"mouse_scroll": number;
 	"drag": Vector2;
 	"physics": void;
 	"debugrender": void;
