@@ -374,6 +374,11 @@ declare namespace cam {
 	function setPos(x: number, y: number): void;
 
 	/**
+	 * Sets the zoom of the camera
+	 */
+	function setZoom(zoom: number): void;
+
+	/**
 	 * The window width in pixel
 	 */
 	var width: number;
@@ -521,4 +526,12 @@ declare namespace json {
 	 * Serializes an object
 	 */
 	function dump(obj: any): string;
+}
+
+declare namespace pointer {
+
+	/**
+	 * Returns the position of the mouse pointer
+	 */
+	function getPos(): Vector2;
 }

@@ -8,7 +8,7 @@ const canvas = Array(32 * 32).fill(0);
 const host = 'localhost';
 const port = 8000;
 
-const encode = function (canvas) {
+const encode = (canvas) => {
     let data = "";
     for (let i = 0; i < canvas.length; i++)
         data += BASE32[canvas[i]];
@@ -40,7 +40,7 @@ const encode = function (canvas) {
     return compressed;
 };
 
-const requestListener = function (req, res) {
+const requestListener = (req, res) => {
     // get ip from req
     const ip = req.socket.remoteAddress;
     console.log(`Client IP: ${ip}`);
